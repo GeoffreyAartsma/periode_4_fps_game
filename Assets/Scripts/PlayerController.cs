@@ -6,13 +6,6 @@ public class PlayerController : MonoBehaviour {
 
     public float speed = 10.0F;
 
-    //Muis cursor wordt gelocked en blijft uit beeld//
-    void Start ()
-    
-    {
-        Cursor.lockState = CursorLockMode.Locked;	
-	}
-	
 	void Update ()
     {
         float translation = Input.GetAxis("Vertical") * speed;
@@ -24,8 +17,5 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKeyDown("escape"))
             Cursor.lockState = CursorLockMode.None;
-
-
-
 	}
 }
