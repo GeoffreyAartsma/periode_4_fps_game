@@ -2,20 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour {
 
-    public float speed = 10.0F;
+    [SerializeField]
+    Vector3 velocity;
 
-	void Update ()
+    Rigidbody rb;
+
+    void Start()
     {
-        float translation = Input.GetAxis("Vertical") * speed;
-        float straffe = Input.GetAxis("Horizontal") * speed;
-        translation *= Time.deltaTime;
-        straffe *= Time.deltaTime;
+        rb = GetComponent<Rigidbody>();   
+    }
 
-        transform.Translate(straffe, 0, translation);
+    void FixedUpdate ()
+    {
+        // Detect Input
+        velocity = Input.GetAxis("Vertical") * transform.forward;
+        velocity += Input.GetAxis("Horizontal") * transform.right;
+        rb.AddForce(velocity, ForceMode.VelocityChange);
+	}
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector3.up * 500f);
+        }
 
         if (Input.GetKeyDown("escape"))
             Cursor.lockState = CursorLockMode.None;
-	}
+    }
 }

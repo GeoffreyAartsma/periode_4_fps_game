@@ -2,31 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class camMouseLook : MonoBehaviour {
+public class camMouseLook : MonoBehaviour
+{
 
-    [SerializeField]
-    float cameraSensitivity;
+    public Transform playerBody;
+    public float mouseSensitivity;
 
-    private float rotationX = 0.0f;
-    private float rotationY = 0.0f;
+    float xAxisClamp = 0.0f;
 
-    void Start()
+    void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        rotationX = Input.GetAxis("Mouse X") * cameraSensitivity * Time.deltaTime;
-        rotationY = Input.GetAxis("Mouse Y") * cameraSensitivity * Time.deltaTime;
-        rotationY = Mathf.Clamp(rotationY, -90, 90);
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
 
-        transform.parent.localRotation = Quaternion.AngleAxis(rotationX, Vector3.up);
-        transform.localRotation *= Quaternion.AngleAxis(rotationY, Vector3.left);
+        float rotAmountX = mouseX * mouseSensitivity;
+        float rotAmountY = mouseY * mouseSensitivity;
+
+        xAxisClamp -= rotAmountY;
+
+        Vector3 targetRotCam = transform.rotation.eulerAngles;
+        Vector3 targetRotBody = playerBody.rotation.eulerAngles;
+
+        targetRotCam.x -= rotAmountY;
+        targetRotCam.z = 0;
+        targetRotBody.y += rotAmountX;
+
+        if (xAxisClamp > 90)
+        {
+            xAxisClamp = 90;
+            targetRotCam.x = 90;
+        }
+        else if (xAxisClamp < -90)
+        {
+            xAxisClamp = -90;
+            targetRotCam.x = 270;
+        }
+
+        transform.rotation = Quaternion.Euler(targetRotCam);
+        playerBody.rotation = Quaternion.Euler(targetRotBody);
     }
-
-
-
 }
-
 
