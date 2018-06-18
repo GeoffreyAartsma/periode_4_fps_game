@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour {
 
-    [SerializeField]
+
     Vector3 velocity;
 
     Rigidbody rb;
@@ -17,9 +17,11 @@ public class PlayerController : MonoBehaviour {
 
     void FixedUpdate ()
     {
-        // Detect Input
+        // Bewegingen wasd * de Vector
         velocity = Input.GetAxis("Vertical") * transform.forward;
+        // GetAxis geeft een nummer terug van -1 en 1 dus als je naar links drukt dan doe je -1 * rechts en dat is links
         velocity += Input.GetAxis("Horizontal") * transform.right;
+        // Past de snelheid aan van het lopen
         rb.AddForce(velocity, ForceMode.VelocityChange);
 	}
 
@@ -29,8 +31,5 @@ public class PlayerController : MonoBehaviour {
         {
             rb.AddForce(Vector3.up * 500f);
         }
-
-        if (Input.GetKeyDown("escape"))
-            Cursor.lockState = CursorLockMode.None;
     }
 }

@@ -4,33 +4,31 @@ using UnityEngine;
 
 public class PlayerMoveObject : MonoBehaviour {
 
+    //Hoeveel units afstand de raycast kan
     [SerializeField]
     int range;
 
-    bool isGrabbing;
+    //Bool is als iets waar of niet waar is
+    public bool isGrabbing;
 
     Rigidbody grabbingRigidbody;
     float grabbingDisctance;
-
-
-    // Use this for initialization
-    void Start ()
-    {
-		
-	}
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
         if (isGrabbing)
         {
+            //Gravity gaat uit als je het blokje oppakt
             grabbingRigidbody.useGravity = false;
+            //De afstand tussen de player en het blokje
             Vector3 boxPosition = transform.position + transform.TransformDirection(Vector3.forward) * grabbingDisctance;
             grabbingRigidbody.MovePosition(boxPosition);
         }
 
         else if (grabbingRigidbody)
         {
+            //Als linker muisknop
             grabbingRigidbody.useGravity = true;
         }
         
@@ -52,11 +50,15 @@ public class PlayerMoveObject : MonoBehaviour {
             // Does the ray intersect any objects excluding the player layer
             if (!isGrabbing && Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, range, layerMask))
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                grabbingDisctance = hit.distance;
-                grabbingRigidbody = hit.rigidbody;
+               //if (hit.transform.GetComponent<SnapToGrid>().isSnapped)
+                //{
 
-                isGrabbing = true;
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                    grabbingDisctance = hit.distance;
+                    grabbingRigidbody = hit.rigidbody;
+
+                    isGrabbing = true;
+                //}
             }
 
             else
