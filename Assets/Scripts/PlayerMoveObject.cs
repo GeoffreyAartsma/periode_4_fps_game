@@ -50,15 +50,15 @@ public class PlayerMoveObject : MonoBehaviour {
             // Does the ray intersect any objects excluding the player layer
             if (!isGrabbing && Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, range, layerMask))
             {
-               //if (hit.transform.GetComponent<SnapToGrid>().isSnapped)
-                //{
+                if (!hit.transform.GetComponent<SnapToGrid>().isSnapped)
+                {
 
                     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                     grabbingDisctance = hit.distance;
                     grabbingRigidbody = hit.rigidbody;
 
                     isGrabbing = true;
-                //}
+                }
             }
 
             else

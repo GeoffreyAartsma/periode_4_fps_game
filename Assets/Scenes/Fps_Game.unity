@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657856, g: 0.4964133, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964133, b: 0.5748179, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -745,10 +745,10 @@ GameObject:
   - component: {fileID: 531178290}
   - component: {fileID: 531178289}
   - component: {fileID: 531178292}
-  - component: {fileID: 531178293}
   - component: {fileID: 531178294}
+  - component: {fileID: 531178293}
   m_Layer: 10
-  m_Name: 'Ground Plate '
+  m_Name: 'GroundPlate '
   m_TagString: GroundPlate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -760,13 +760,13 @@ Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 6e6d6cfc6acfc8c48909f2d8140521df, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 531178287}
-  m_LocalRotation: {x: -0.000000030908616, y: -0.7071067, z: 0.7071068, w: 0.000000030908623}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -13.31, y: 2.606, z: -12.094}
-  m_LocalScale: {x: -32.41595, y: -32.41595, z: -32.41595}
+  m_LocalScale: {x: 32, y: 32, z: 32}
   m_Children: []
   m_Father: {fileID: 1317770046}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!54 &531178289
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -850,11 +850,11 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 531178287}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.008369692, y: 0.011869759, z: 0.006823956}
-  m_Center: {x: -0.00092266535, y: -0.00033788398, z: 0.0041615823}
+  m_Size: {x: 0.017142422, y: 0.01448878, z: 0.012681713}
+  m_Center: {x: 0.00003140943, y: -0.00023247245, z: 0.0014750053}
 --- !u!114 &531178294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,6 +868,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 282840810}
   isSnapped: 0
+  targetName: MiddlePiece
+  snapOffset: {x: 0.1, y: 0.34, z: -0.3}
 --- !u!4 &615299225 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4040181190737270, guid: 35212d6406946bd41a02db354d061e36,
@@ -1134,7 +1136,7 @@ Rigidbody:
   m_GameObject: {fileID: 1033321925}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 6
+  m_Drag: 0.1
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -1224,7 +1226,7 @@ GameObject:
   - component: {fileID: 1071651312}
   - component: {fileID: 1071651314}
   m_Layer: 10
-  m_Name: 'Top Piece '
+  m_Name: TopPiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1331,6 +1333,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 282840810}
   isSnapped: 0
+  targetName: 
+  snapOffset: {x: 0.01, y: 0.34, z: -0.175}
 --- !u!1001 &1115086833
 Prefab:
   m_ObjectHideFlags: 0
@@ -1984,7 +1988,7 @@ GameObject:
   - component: {fileID: 2105926241}
   - component: {fileID: 2105926242}
   m_Layer: 10
-  m_Name: Middle Piece
+  m_Name: MiddlePiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2075,7 +2079,7 @@ MeshCollider:
   m_GameObject: {fileID: 2105926235}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -2106,3 +2110,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 282840810}
   isSnapped: 0
+  targetName: TopPiece
+  snapOffset: {x: 0.02, y: 0.34, z: -0.17}

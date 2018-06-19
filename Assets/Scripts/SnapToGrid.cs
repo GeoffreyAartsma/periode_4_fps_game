@@ -8,27 +8,20 @@ public class SnapToGrid : MonoBehaviour {
     GameObject player;
 
     public bool isSnapped;
+    public string targetName;
 
-    string targetName;
-
-    void Start()
-    {
-        if (transform.name == "Ground Plate")
-        {
-            targetName = "Middle Piece";
-        }
-        else if (transform.name == "Middle Piece")
-        {
-            targetName = "Top Piece";
-        }
-    }
+    [SerializeField]
+    Vector3 snapOffset;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == targetName)
+        SnapToGrid otherScript = other.GetComponent<SnapToGrid>();
+        if (other.transform.name == targetName && !otherScript.isSnapped)
         {
             player.GetComponent<PlayerMoveObject>().isGrabbing = false;
-            other.transform.position = transform.position + Vector3.up;
+            other.transform.position = transform.position + snapOffset;
+            otherScript.isSnapped = true;
+            isSnapped = true;
         }
     }
 }
